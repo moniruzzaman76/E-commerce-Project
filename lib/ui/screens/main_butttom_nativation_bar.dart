@@ -1,7 +1,8 @@
+import 'package:e_commerce/ui/getx/bottom_navigation_controller.dart';
 import 'package:e_commerce/ui/screens/home_screen.dart';
 import 'package:e_commerce/ui/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'categories_screen.dart';
 
 class MainBottomNavigationBar extends StatefulWidget {
@@ -10,10 +11,9 @@ class MainBottomNavigationBar extends StatefulWidget {
   @override
   State<MainBottomNavigationBar> createState() => _MainBottomNavigationBarState();
 }
-
 class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
 
-  int _selectedIndex = 0;
+  BottomNavigationController controller = Get.put(BottomNavigationController());
 
   final List<Widget>screens = const [
      HomeScreen(),
@@ -25,22 +25,30 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[_selectedIndex],
-      bottomNavigationBar:BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primaryColor,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        onTap: (index){
-          _selectedIndex = index;
-          setState(() {});
-        },
-        items:  const [
-          BottomNavigationBarItem(icon: Icon(Icons.home,size: 30),label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.widgets_outlined,size: 30),label: 'Category'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart,size: 30),label: 'Card',),
-          BottomNavigationBarItem(icon: Icon(Icons.card_giftcard,size: 30),label: 'Wish'),
-        ],
+      body: GetBuilder<BottomNavigationController>(
+        builder: (_) {
+          return screens[controller.selectedIndex];
+        }
+      ),
+
+      bottomNavigationBar:GetBuilder<BottomNavigationController>(
+        builder: (_) {
+          return BottomNavigationBar(
+            currentIndex: controller.selectedIndex,
+            selectedItemColor: AppColors.primaryColor,
+            unselectedItemColor: Colors.grey,
+            showUnselectedLabels: true,
+            onTap: (index){
+              controller.changeIndex(index);
+            },
+            items:  const [
+              BottomNavigationBarItem(icon: Icon(Icons.home,size: 30),label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.widgets_outlined,size: 30),label: 'Category'),
+              BottomNavigationBarItem(icon: Icon(Icons.shopping_cart,size: 30),label: 'Card',),
+              BottomNavigationBarItem(icon: Icon(Icons.card_giftcard,size: 30),label: 'Wish'),
+            ],
+          );
+        }
       ),
     );
   }

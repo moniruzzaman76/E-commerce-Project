@@ -1,4 +1,5 @@
 import 'package:e_commerce/ui/getx/bottom_navigation_controller.dart';
+import 'package:e_commerce/ui/screens/cards_screen.dart';
 import 'package:e_commerce/ui/screens/home_screen.dart';
 import 'package:e_commerce/ui/utils/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
   final List<Widget>screens = const [
      HomeScreen(),
      CategoryScreen(),
-     HomeScreen(),
+     CardScreen(),
      HomeScreen(),
   ];
 

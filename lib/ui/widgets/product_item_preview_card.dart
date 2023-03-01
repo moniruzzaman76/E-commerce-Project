@@ -32,6 +32,7 @@ class ProductItemPreviewCard extends StatelessWidget {
             ),),
           const SizedBox(height: 6,),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(width: 6,),
               Text('\$100',style: TextStyle(
@@ -40,7 +41,7 @@ class ProductItemPreviewCard extends StatelessWidget {
               ),),
               const SizedBox(width: 8,),
               const Icon(Icons.star,size: 16,color: Colors.amberAccent,),
-              const Text('4,5',style: TextStyle(
+              const Text('4.5',style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
                   color: Colors.grey

@@ -63,7 +63,7 @@ class ProductItemPreviewCard extends StatelessWidget {
               const SizedBox(width: 10,),
             ],
           ),
-          const SizedBox(height: 8,)
+          const SizedBox(height: 7,)
         ],
       ),
     );

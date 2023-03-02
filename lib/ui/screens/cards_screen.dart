@@ -49,7 +49,6 @@ class _CardScreenState extends State<CardScreen> {
                 }
             ),
           ),
-
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(

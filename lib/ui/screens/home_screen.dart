@@ -1,10 +1,11 @@
-import 'package:e_commerce/ui/screens/categories_screen.dart';
+import 'package:e_commerce/ui/getx/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/category_item_widget.dart';
 import '../widgets/home/home_barner_slider.dart';
 import '../widgets/home/section_slider.dart';
 import '../widgets/product_item_preview_card.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +15,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  HomeController homeController = Get.put(HomeController());
+
+  @override
+  void initState() {
+    homeController.getProductSliderList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +82,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ) ,
               ),
               const SizedBox(height: 20,),
-              HomeBannerSlider(),
+
+              GetBuilder<HomeController>(
+                builder: (homeController) {
+                  if(homeController.getProductSliderInProgress){
+                    return const CircularProgressIndicator();
+                  }else {
+                    return HomeBannerSlider(
+                      productSliderModel:homeController.productSliderModel,
+                    );
+                  }
+                }
+              ),
+
               const SizedBox(height: 20,),
               SectionHeader(
                 headerName: 'All Categories',

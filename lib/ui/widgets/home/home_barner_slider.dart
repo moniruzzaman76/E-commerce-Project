@@ -1,12 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:e_commerce/data/models/product_slider_model.dart';
 import 'package:flutter/material.dart';
 import '../../utils/app_colors.dart';
 
 class HomeBannerSlider extends StatelessWidget {
-  HomeBannerSlider({Key? key}) : super(key: key);
+  HomeBannerSlider({Key? key, required this.productSliderModel}) : super(key: key);
 
   final CarouselController _carouselController = CarouselController();
   final ValueNotifier<int> _currentSelectedIndex = ValueNotifier(0);
+  final ProductSliderModel productSliderModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class HomeBannerSlider extends StatelessWidget {
                   _currentSelectedIndex.value = index;
                 }
             ),
-            items: [1,2,3,4,5].map((i) {
+            items: productSliderModel.data?.map((slider) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
@@ -32,10 +34,11 @@ class HomeBannerSlider extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(horizontal: 2.0),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: AppColors.primaryColor
+                          color: AppColors.primaryColor,
+                        image: DecorationImage(
+                          image: NetworkImage(slider.image??'')
+                        )
                       ),
-                      alignment: Alignment.center,
-                      child: Text('text $i', style: const TextStyle(fontSize: 16.0),)
                   );
                 },
               );
@@ -48,7 +51,7 @@ class HomeBannerSlider extends StatelessWidget {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for(int i=0; i<5;i++)
+                    for(int i=0; i<(productSliderModel.data?.length??0);i++)
                       Container(
                         margin: const EdgeInsets.all(3),
                         width: 15,

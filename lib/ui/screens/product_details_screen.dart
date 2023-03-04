@@ -2,7 +2,6 @@ import 'package:e_commerce/ui/screens/review_screen.dart';
 import 'package:e_commerce/ui/utils/app_colors.dart';
 import 'package:e_commerce/ui/widgets/product_images_slider.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/elevated_button.dart';
 import '../widgets/inc_dec_from_field.dart';
 class ProductDetailsScreen extends StatefulWidget {

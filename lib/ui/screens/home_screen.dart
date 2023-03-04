@@ -1,3 +1,4 @@
+import 'package:e_commerce/ui/screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/category_item_widget.dart';
@@ -76,7 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 20,),
               SectionHeader(
                 headerName: 'All Categories',
-                onTabSeeAll: (){ },
+                onTabSeeAll: (){
+                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>  CategoryScreen()));
+                },
               ),
               const SizedBox(height: 16,),
               SingleChildScrollView(

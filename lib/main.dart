@@ -1,4 +1,3 @@
-import 'package:e_commerce/ui/screens/email_auth_screen.dart';
 import 'package:e_commerce/ui/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,7 @@ class CraftyBoyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:EmailAuthScreen()
+      home:const SplashScreen()
     );
   }
 }

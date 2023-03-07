@@ -34,7 +34,7 @@ class HomeBannerSlider extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(horizontal: 2.0),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: AppColors.primaryColor,
+                          color:Colors.amber.withOpacity(.7),
                         image: DecorationImage(
                           image: NetworkImage(slider.image??'')
                         )

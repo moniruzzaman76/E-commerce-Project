@@ -5,6 +5,8 @@ import 'package:e_commerce/ui/screens/wish_list_screen.dart';
 import 'package:e_commerce/ui/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../getx/category_controller.dart';
+import '../getx/home_controller.dart';
 import 'categories_screen.dart';
 
 class MainBottomNavigationBar extends StatefulWidget {
@@ -16,6 +18,8 @@ class MainBottomNavigationBar extends StatefulWidget {
 class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
 
   BottomNavigationController controller = Get.put(BottomNavigationController());
+  HomeController homeController = Get.put(HomeController());
+  CategoryController categoryController = Get.put(CategoryController());
 
   final List<Widget>screens = const [
      HomeScreen(),
@@ -23,6 +27,14 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
      CardScreen(),
      WishListScreen(),
   ];
+
+  @override
+  void initState() {
+    homeController.getProductSliderList();
+    categoryController.getCategories();
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {

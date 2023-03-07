@@ -4,11 +4,11 @@ import '../utils/app_colors.dart';
 
 class CategoriesItemsWidget extends StatelessWidget {
   const CategoriesItemsWidget({
-    super.key, required this.categoryItemName, required this.icon, required this.onTab,
+    super.key, required this.categoryItemName, required this.image, required this.onTab,
   });
 
   final String categoryItemName;
-  final IconData icon;
+  final String image;
   final VoidCallback onTab;
 
   @override
@@ -26,12 +26,10 @@ class CategoriesItemsWidget extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(18),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryColor.withOpacity(.15),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(icon,size: 40,color: AppColors.primaryColor,),
+                  child: Image.network(image,height:35,width: 30,),
                 ),
-                const SizedBox(height: 4,),
                 Text(categoryItemName,style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

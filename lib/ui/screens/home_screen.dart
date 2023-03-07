@@ -1,6 +1,8 @@
+import 'package:e_commerce/ui/getx/bottom_navigation_controller.dart';
 import 'package:e_commerce/ui/getx/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../getx/category_controller.dart';
 import '../widgets/category_item_widget.dart';
 import '../widgets/home/home_barner_slider.dart';
 import '../widgets/home/section_slider.dart';
@@ -16,13 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  HomeController homeController = Get.put(HomeController());
-
-  @override
-  void initState() {
-    homeController.getProductSliderList();
-    super.initState();
-  }
+BottomNavigationController bottomNavigationController = Get.put(BottomNavigationController());
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ) ,
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 16,),
 
               GetBuilder<HomeController>(
                 builder: (homeController) {
@@ -95,46 +91,73 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               ),
 
-              const SizedBox(height: 20,),
+              const SizedBox(height: 16,),
               SectionHeader(
-                headerName: 'All Categories',
+                headerName: ' Categories',
                 onTabSeeAll: (){
-                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>  CategoryScreen()));
+               bottomNavigationController.changeIndex(1);
                 },
               ),
               const SizedBox(height: 16,),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    CategoriesItemsWidget(
-                      onTab: (){},
-                      icon:Icons.computer,
-                      categoryItemName: 'Electronics',
-                    ),
-                    CategoriesItemsWidget(
-                      onTab: (){},
-                      icon:Icons.food_bank_outlined,
-                      categoryItemName: 'Food',
-                    ),
-                    CategoriesItemsWidget(
-                      onTab: (){},
-                      icon:Icons.favorite_sharp,
-                      categoryItemName: 'Fashion',
-                    ),
-                    CategoriesItemsWidget(
-                      onTab: (){},
-                      icon:Icons.female_outlined,
-                      categoryItemName: 'Furniture',
-                    ),
-                    CategoriesItemsWidget(
-                      onTab: (){},
-                      icon:Icons.mobile_friendly,
-                      categoryItemName: 'Mobile',
-                    ),
-                  ],
-                ),
+
+              GetBuilder<CategoryController>(
+                builder: (controller) {
+                  if(controller.getCategoryInProgress) {
+                    return const Center(
+                        child: CircularProgressIndicator()
+                    );
+                  }
+                  else {
+                    return SizedBox(
+                      height: 150,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount:controller.categoryModel.data?.length??0,
+                          itemBuilder: (context,index){
+                            return CategoriesItemsWidget(
+                              onTab: (){},
+                             image: controller.categoryModel.data![index].categoryImg??"",
+                              categoryItemName: controller.categoryModel.data![index].categoryName??"",
+                            );
+                          }
+                      ),
+                    );
+                  //   return SingleChildScrollView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   child: Row(
+                  //     children: [
+                  //       CategoriesItemsWidget(
+                  //         onTab: (){},
+                  //         icon:Icons.computer,
+                  //         categoryItemName: 'Electronics',
+                  //       ),
+                  //       CategoriesItemsWidget(
+                  //         onTab: (){},
+                  //         icon:Icons.food_bank_outlined,
+                  //         categoryItemName: 'Food',
+                  //       ),
+                  //       CategoriesItemsWidget(
+                  //         onTab: (){},
+                  //         icon:Icons.favorite_sharp,
+                  //         categoryItemName: 'Fashion',
+                  //       ),
+                  //       CategoriesItemsWidget(
+                  //         onTab: (){},
+                  //         icon:Icons.female_outlined,
+                  //         categoryItemName: 'Furniture',
+                  //       ),
+                  //       CategoriesItemsWidget(
+                  //         onTab: (){},
+                  //         icon:Icons.mobile_friendly,
+                  //         categoryItemName: 'Mobile',
+                  //       ),
+                  //     ],
+                  //   ),
+                  // );
+                  }
+                }
               ),
+              const SizedBox(height: 16,),
               SectionHeader(headerName: "Popular", onTabSeeAll: (){
 
               }),

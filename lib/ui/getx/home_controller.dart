@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController{
   ProductSliderModel productSliderModel = ProductSliderModel();
+
    bool getProductSliderInProgress = false;
   Future<bool>getProductSliderList()async{
     getProductSliderInProgress = true;

@@ -1,8 +1,8 @@
 import 'package:e_commerce/ui/getx/bottom_navigation_controller.dart';
+import 'package:e_commerce/ui/getx/category_controller.dart';
 import 'package:e_commerce/ui/widgets/category_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -34,16 +34,30 @@ class _CategoryScreenState extends State<CategoryScreen> {
           icon: const Icon(Icons.arrow_back_ios,color: Colors.black54,),
         ),
       ),
-      body: GridView.builder(
-        itemCount: 15,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4) ,
-          itemBuilder: (context,index){
-            return CategoriesItemsWidget(
-                categoryItemName: "Electronic",
-                icon: Icons.fastfood_sharp,
-                onTab: (){}
+      body: GetBuilder<CategoryController>(
+        builder: (controller) {
+          if(controller.getCategoryInProgress){
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           }
+          return RefreshIndicator(
+            onRefresh: ()async{
+              controller.getCategories();
+            },
+            child: GridView.builder(
+              itemCount:controller.categoryModel.data?.length??0,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:4) ,
+                itemBuilder: (context,index){
+                  return CategoriesItemsWidget(
+                      categoryItemName: controller.categoryModel.data![index].categoryName??"",
+                      image:controller.categoryModel.data![index].categoryImg??"",
+                      onTab: (){}
+                  );
+                }
+            ),
+          );
+        }
       ),
     );
   }

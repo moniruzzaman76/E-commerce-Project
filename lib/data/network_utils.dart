@@ -25,7 +25,7 @@ class NetworkUtils{
   }
 
   /// post method for http request
-  Future<dynamic>postMethod(String url,{VoidCallback? onUnAuthorize,Map<String,String>?body})async{
+  Future<dynamic>postMethod(String url,{VoidCallback? onUnAuthorize, Map<String,String>?body})async{
     try{
       Uri uri = Uri.parse(url);
       final Response response = await post(uri,headers:{

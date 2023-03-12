@@ -33,16 +33,18 @@ class _WishListScreenState extends State<WishListScreen> {
           icon: const Icon(Icons.arrow_back_ios,color: Colors.black54,),
         ),
       ),
-      body: GridView.builder(
-          itemCount: 15,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-            childAspectRatio: 7/8
-          ) ,
-          itemBuilder: (context,index){
-            return const ProductItemPreviewCard();
-          }
-      ),
+      // body: GridView.builder(
+      //     itemCount: 15,
+      //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      //         crossAxisCount: 3,
+      //       childAspectRatio: 7/8
+      //     ) ,
+      //     itemBuilder: (context,index){
+      //       return  ProductItemPreviewCard(
+      //         productData: ,
+      //       );
+      //     }
+      // ),
     );
   }
 }

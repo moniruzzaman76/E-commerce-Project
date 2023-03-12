@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../getx/category_controller.dart';
 import '../getx/home_controller.dart';
+import '../getx/product_controller.dart';
 import 'categories_screen.dart';
 
 class MainBottomNavigationBar extends StatefulWidget {
@@ -20,6 +21,8 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
   BottomNavigationController controller = Get.put(BottomNavigationController());
   HomeController homeController = Get.put(HomeController());
   CategoryController categoryController = Get.put(CategoryController());
+  ProductController productController = Get.put(ProductController());
+
 
   final List<Widget>screens = const [
      HomeScreen(),
@@ -30,9 +33,14 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
 
   @override
   void initState() {
-    homeController.getProductSliderList();
-    categoryController.getCategories();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      homeController.getProductSliderList();
+      categoryController.getCategories();
+      productController.getPopularProducts();
+      productController.getSpecialProducts();
+      productController.getNewProducts();
+    });
   }
 
 

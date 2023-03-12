@@ -14,21 +14,22 @@ class CategoriesItemsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-
-      },
+      onTap:onTab ,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: Row(
           children: [
             Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(18),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Image.network(image,height:35,width: 30,),
+                  child: Image.network(image,
+                    height:35,
+                    width: 30,
+                  ),
                 ),
                 Text(categoryItemName,style: TextStyle(
                     fontSize: 16,

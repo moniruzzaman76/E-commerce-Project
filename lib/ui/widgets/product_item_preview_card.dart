@@ -1,11 +1,14 @@
+import 'package:e_commerce/data/models/product_model.dart';
 import 'package:e_commerce/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 
 class ProductItemPreviewCard extends StatelessWidget {
   const ProductItemPreviewCard({
-    super.key,
+    super.key, required this.productData,
   });
+
+  final ProductData productData;
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +23,17 @@ class ProductItemPreviewCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Image.asset(
-              'assets/images/product_shoe.png',
-              height: 120,
-              width: 142,
+            Image.network(
+              productData.image ?? "",
+              height: 90,
+              width: 160,
               fit:BoxFit.cover,
             ),
             const SizedBox(height: 6,),
-            const Text('Product Name',
+             Text(
+             productData.title ?? '',
               maxLines: 2,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 13,
                 fontWeight: FontWeight.bold,
@@ -40,13 +44,14 @@ class ProductItemPreviewCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(width: 6,),
-                Text('\$100',style: TextStyle(
+                Text('\$${productData.price??""}',style: TextStyle(
                   color: AppColors.primaryColor,
                   fontSize: 12,
                 ),),
                 const SizedBox(width: 8,),
                 const Icon(Icons.star,size: 16,color: Colors.amberAccent,),
-                const Text('4.5',style: TextStyle(
+                 Text(
+                 " ${productData.star ?? 0.0}",style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: Colors.grey
@@ -68,7 +73,7 @@ class ProductItemPreviewCard extends StatelessWidget {
                 const SizedBox(width: 10,),
               ],
             ),
-            const SizedBox(height: 7,)
+             const SizedBox(height: 6,)
           ],
         ),
       ),
